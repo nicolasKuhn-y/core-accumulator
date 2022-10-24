@@ -2,6 +2,7 @@ import { DomainEvent, Id } from "common-domain";
 
 type EventInput = {
 	id: Id;
+	userId: Id;
 };
 
 export class AccumulatorCreatedEvent extends DomainEvent {
@@ -9,7 +10,10 @@ export class AccumulatorCreatedEvent extends DomainEvent {
 		super({
 			id: input.id,
 			type: "ltv.accumulators.1.command.accumulator.create",
-			attributes: {}
+			attributes: {
+				userId: input.userId.value,
+				accumulatorId: input.id.value
+			}
 		});
 	}
 }

@@ -32,7 +32,11 @@ export class Accumulator extends AggregateRoot {
 
 		const accumulatorCreated = new Accumulator(props);
 
-		const createdAccumulatorEvent = new AccumulatorCreatedEvent({ id: accumulatorCreated.id });
+		const createdAccumulatorEvent = new AccumulatorCreatedEvent({
+			id: accumulatorCreated.id,
+			userId: accumulatorCreated.userId
+		});
+
 		accumulatorCreated.saveEvent(createdAccumulatorEvent);
 
 		return accumulatorCreated;

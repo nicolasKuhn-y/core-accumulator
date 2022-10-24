@@ -19,7 +19,7 @@ export class Accumulator extends AggregateRoot {
 	private readonly total: Total;
 	private readonly period: Period;
 
-	constructor(props: AccumulatorProps) {
+	private constructor(props: AccumulatorProps) {
 		super();
 		this.id = props.id;
 		this.userId = props.userId;
@@ -28,7 +28,7 @@ export class Accumulator extends AggregateRoot {
 	}
 
 	public static create(dto: CreateAccumulatorDto): Accumulator {
-		const props: AccumulatorProps = accumulatorFactory.mapToCreate(dto, { acceptEmptyValues: true });
+		const props: AccumulatorProps = accumulatorFactory.mapToCreate({ ...dto, id: dto.id || "" });
 
 		const accumulatorCreated = new Accumulator(props);
 
@@ -38,8 +38,8 @@ export class Accumulator extends AggregateRoot {
 		return accumulatorCreated;
 	}
 
-	public static buildFromPrimitives(dto: CreateAccumulatorDto): Accumulator {
-		const props: AccumulatorProps = accumulatorFactory.mapToCreate(dto, { acceptEmptyValues: true });
+	public static rebuild(dto: Required<CreateAccumulatorDto>): Accumulator {
+		const props: AccumulatorProps = accumulatorFactory.mapToCreate(dto);
 
 		return new Accumulator(props);
 	}
@@ -48,8 +48,7 @@ export class Accumulator extends AggregateRoot {
 	public close() {}
 
 	// TODO: Logica del calculo
-	public calculateTotal(transactions: Transaction[]) {
-		// const transactions = this.rules.apply(transactions);
-		// return transactions.reduce();
+	public calculateTotal(transactions: Transaction[]): number {
+		return transactions.reduce((tempTotal, transaction) => tempTotal + transaction.amount, 0);
 	}
 }

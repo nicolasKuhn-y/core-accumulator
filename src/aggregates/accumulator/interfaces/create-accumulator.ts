@@ -1,7 +1,7 @@
 export interface CreateAccumulatorDto {
 	id?: string;
 	userId: string;
-	total?: number;
+	total: number;
 	period: {
 		startDate: Date;
 		endDate?: Date;

@@ -1,0 +1,1 @@
+{"version":3,"file":"create-accumulator.d.ts","sourceRoot":"","sources":["../../../../src/aggregates/accumulator/interfaces/create-accumulator.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,oBAAoB;IACpC,EAAE,CAAC,EAAE,MAAM,CAAC;IACZ,MAAM,EAAE,MAAM,CAAC;IACf,KAAK,CAAC,EAAE,MAAM,CAAC;IACf,MAAM,EAAE;QACP,SAAS,EAAE,IAAI,CAAC;QAChB,OAAO,CAAC,EAAE,IAAI,CAAC;KACf,CAAC;CACF"}

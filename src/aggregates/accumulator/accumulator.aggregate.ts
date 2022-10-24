@@ -1,4 +1,4 @@
-import { AggregateRoot, Id } from "common-domain/dist";
+import { AggregateRoot, Id } from "common-domain";
 
 // Events
 import { AccumulatorCreatedEvent } from "./events/accumulator-created";
@@ -7,25 +7,49 @@ import { AccumulatorCreatedEvent } from "./events/accumulator-created";
 import { AccumulatorProps } from "./interfaces/accumulator-props";
 import { CreateAccumulatorDto } from "./interfaces/create-accumulator";
 
+// Value objects & Entities
+import { accumulatorFactory } from "./accumulator.factory";
+import { Period } from "./entities/period";
+import { Total } from "./value-objects/total";
 import { Transaction } from "../transaction/transaction.aggregate";
 
-export class Accumulator extends AggregateRoot<AccumulatorProps> {
+export class Accumulator extends AggregateRoot {
 	private readonly id: Id;
-	private transactions: Transaction[];
+	private readonly userId: Id;
+	private readonly total: Total;
+	private readonly period: Period;
 
 	constructor(props: AccumulatorProps) {
-		super(props);
+		super();
 		this.id = props.id;
-		this.transactions = props.transactions;
+		this.userId = props.userId;
+		this.total = props.total;
+		this.period = props.period;
 	}
 
 	public static create(dto: CreateAccumulatorDto): Accumulator {
-		const id = new Id(dto.id);
-		const operations = dto.operations.map((rawData) => Transaction.create(rawData));
+		const props: AccumulatorProps = accumulatorFactory.mapToCreate(dto, { acceptEmptyValues: true });
 
-		const accumulatorCreated = new Accumulator({ id, transactions: operations });
-		accumulatorCreated.saveEvent(new AccumulatorCreatedEvent({ id }));
+		const accumulatorCreated = new Accumulator(props);
+
+		const createdAccumulatorEvent = new AccumulatorCreatedEvent({ id: accumulatorCreated.id });
+		accumulatorCreated.saveEvent(createdAccumulatorEvent);
 
 		return accumulatorCreated;
+	}
+
+	public static buildFromPrimitives(dto: CreateAccumulatorDto): Accumulator {
+		const props: AccumulatorProps = accumulatorFactory.mapToCreate(dto, { acceptEmptyValues: true });
+
+		return new Accumulator(props);
+	}
+
+	// TODO: Logica de cierra/reseteo del acumulador
+	public close() {}
+
+	// TODO: Logica del calculo
+	public calculateTotal(transactions: Transaction[]) {
+		// const transactions = this.rules.apply(transactions);
+		// return transactions.reduce();
 	}
 }

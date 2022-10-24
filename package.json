@@ -2,7 +2,8 @@
 	"name": "accumulator-core",
 	"version": "1.0.0",
 	"description": "Domain core for Accumulator module",
-	"main": "index.js",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"scripts": {
 		"link": "npm link common-domain",
 		"test": "jest --colors --verbose",

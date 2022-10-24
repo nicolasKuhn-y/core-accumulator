@@ -1,0 +1,1 @@
+{"version":3,"file":"transaction.factory.d.ts","sourceRoot":"","sources":["../../../src/aggregates/transaction/transaction.factory.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,EAAE,EAAE,kBAAkB,EAAE,MAAM,eAAe,CAAC;AAEvD,OAAO,EAAE,MAAM,EAAE,MAAM,wBAAwB,CAAC;AAChD,OAAO,EAAE,IAAI,EAAE,MAAM,sBAAsB,CAAC;AAE5C,eAAO,MAAM,kBAAkB;;;;;uCAK7B,CAAC"}

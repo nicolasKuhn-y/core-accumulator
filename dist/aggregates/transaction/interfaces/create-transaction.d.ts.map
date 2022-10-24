@@ -1,0 +1,1 @@
+{"version":3,"file":"create-transaction.d.ts","sourceRoot":"","sources":["../../../../src/aggregates/transaction/interfaces/create-transaction.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,eAAe,EAAE,MAAM,uBAAuB,CAAC;AAExD,MAAM,WAAW,oBAAoB;IACpC,EAAE,CAAC,EAAE,MAAM,CAAC;IACZ,MAAM,EAAE,MAAM,CAAC;IACf,IAAI,EAAE,eAAe,CAAC;IACtB,MAAM,EAAE,MAAM,CAAC;CACf"}

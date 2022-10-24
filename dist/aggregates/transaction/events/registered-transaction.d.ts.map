@@ -1,0 +1,1 @@
+{"version":3,"file":"registered-transaction.d.ts","sourceRoot":"","sources":["../../../../src/aggregates/transaction/events/registered-transaction.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAE,EAAE,EAAE,MAAM,eAAe,CAAC;AAEhD,aAAK,UAAU,GAAG;IACjB,EAAE,EAAE,EAAE,CAAC;CACP,CAAC;AAEF,qBAAa,wBAAyB,SAAQ,WAAW;gBAC5C,KAAK,EAAE,UAAU;CAO7B"}

@@ -1,49 +1,49 @@
-import { AggregateRoot, Id } from "common-domain";
+import { AggregateRoot, Id } from 'common-domain'
 
 // Events
-import { RecordedTransactionEvent } from "./events/registered-transaction";
+import { RecordedTransactionEvent } from './events/registered-transaction'
 
 // Interfaces
-import { CreateTransactionDto } from "./interfaces/create-transaction";
-import { TransactionProps } from "./interfaces/transaction-props";
+import { CreateTransactionDto } from './interfaces/create-transaction'
+import { TransactionProps } from './interfaces/transaction-props'
 
 // Value objects & Entities
-import { transactionFactory } from "./transaction.factory";
-import { Amount } from "./value-objects/amount";
-import { Type } from "./value-objects/type";
+import { transactionFactory } from './transaction.factory'
+import { Amount } from './value-objects/amount'
+import { Type } from './value-objects/type'
 
 export class Transaction extends AggregateRoot {
-	private readonly id: Id;
-	private readonly userId: Id;
-	private readonly type: Type;
-	private readonly _amount: Amount;
+  private readonly id: Id
+  private readonly userId: Id
+  private readonly type: Type
+  private readonly _amount: Amount
 
-	private constructor(props: TransactionProps) {
-		super();
-		this.id = props.id;
-		this._amount = props.amount;
-		this.type = props.type;
-		this.userId = props.userId;
-	}
+  private constructor (props: TransactionProps) {
+    super()
+    this.id = props.id
+    this._amount = props.amount
+    this.type = props.type
+    this.userId = props.userId
+  }
 
-	public static record(dto: CreateTransactionDto): Transaction {
-		const props: TransactionProps = transactionFactory.mapToCreate({ ...dto, id: dto.id || "" });
+  public static record (dto: CreateTransactionDto): Transaction {
+    const props: TransactionProps = transactionFactory.mapToCreate({ ...dto, id: dto.id || '' })
 
-		const transactionRegistered = new Transaction(props);
+    const transactionRegistered = new Transaction(props)
 
-		const transactionRecordedEvent = new RecordedTransactionEvent({ id: transactionRegistered.id });
-		transactionRegistered.saveEvent(transactionRecordedEvent);
+    const transactionRecordedEvent = new RecordedTransactionEvent({ id: transactionRegistered.id })
+    transactionRegistered.saveEvent(transactionRecordedEvent)
 
-		return transactionRegistered;
-	}
+    return transactionRegistered
+  }
 
-	public static rebuild(dto: Required<CreateTransactionDto>): Transaction {
-		const props: TransactionProps = transactionFactory.mapToCreate(dto);
+  public static rebuild (dto: Required<CreateTransactionDto>): Transaction {
+    const props: TransactionProps = transactionFactory.mapToCreate(dto)
 
-		return new Transaction(props);
-	}
+    return new Transaction(props)
+  }
 
-	public get amount(): number {
-		return this._amount.value;
-	}
+  public get amount (): number {
+    return this._amount.value
+  }
 }

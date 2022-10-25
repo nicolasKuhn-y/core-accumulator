@@ -1,13 +1,13 @@
-import { Id } from "common-domain";
+import { Id } from 'common-domain'
 
-import { Accumulator } from "../aggregates/accumulator/accumulator.aggregate";
+import { Accumulator } from '../aggregates/accumulator/accumulator.aggregate'
 
 export interface AccumulatorRepository {
-	save(accumulatorAggregate: Accumulator): Accumulator;
+    save(accumulatorAggregate: Accumulator): Accumulator;
 
-	findById(id: Id): Accumulator;
+    findById(id: Id): Accumulator;
 
-	findByUserId(userId: Id): Accumulator;
+    findByUserId(userId: Id): Accumulator;
 
-	delete(id: Id): Accumulator;
+    delete(id: Id): Accumulator;
 }

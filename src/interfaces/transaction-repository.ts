@@ -1,11 +1,11 @@
-import { Id } from "common-domain";
+import { Id } from 'common-domain'
 
-import { Transaction } from "../aggregates/transaction/transaction.aggregate";
+import { Transaction } from '../aggregates/transaction/transaction.aggregate'
 
 export interface TransactionRepository {
-	save(transactionAggregate: Transaction): Transaction;
+    save(transactionAggregate: Transaction): Transaction;
 
-	findById(id: Id): Transaction;
+    findById(id: Id): Transaction;
 
-	delete(id: Id): Transaction;
+    delete(id: Id): Transaction;
 }

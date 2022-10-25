@@ -2,6 +2,7 @@ import { AggregateRoot, Id } from "common-domain";
 
 // Events
 import { AccumulatorCreatedEvent } from "./events/accumulator-created";
+import { AccumulatorResetEvent } from "./events/accumulator-reset";
 
 // Interfaces
 import { AccumulatorProps } from "./interfaces/accumulator-props";
@@ -11,6 +12,7 @@ import { CreateAccumulatorDto } from "./interfaces/create-accumulator";
 import { accumulatorFactory } from "./accumulator.factory";
 import { Period } from "./entities/period";
 import { Total } from "./value-objects/total";
+import { Status } from "./value-objects/status";
 import { Transaction } from "../transaction/transaction.aggregate";
 
 export class Accumulator extends AggregateRoot {
@@ -18,6 +20,7 @@ export class Accumulator extends AggregateRoot {
 	private readonly userId: Id;
 	private readonly total: Total;
 	private readonly period: Period;
+	private readonly status: Status;
 
 	private constructor(props: AccumulatorProps) {
 		super();
@@ -25,10 +28,11 @@ export class Accumulator extends AggregateRoot {
 		this.userId = props.userId;
 		this.total = props.total;
 		this.period = props.period;
+		this.status = props.status;
 	}
 
 	public static create(dto: CreateAccumulatorDto): Accumulator {
-		const props: AccumulatorProps = accumulatorFactory.mapToCreate({ ...dto, id: dto.id || "" });
+		const props: AccumulatorProps = accumulatorFactory.mapToCreate({ ...dto, id: dto.id || "", status: "open" });
 
 		const accumulatorCreated = new Accumulator(props);
 
@@ -48,10 +52,12 @@ export class Accumulator extends AggregateRoot {
 		return new Accumulator(props);
 	}
 
-	// TODO: Logica de cierra/reseteo del acumulador
-	public close() {}
+	public close() {
+		this.status.close();
 
-	// TODO: Logica del calculo
+		this.saveEvent(new AccumulatorResetEvent());
+	}
+
 	public calculateTotal(transactions: Transaction[]): number {
 		return transactions.reduce((tempTotal, transaction) => tempTotal + transaction.amount, 0);
 	}

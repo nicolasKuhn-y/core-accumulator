@@ -1,6 +1,7 @@
 import { Id } from "common-domain";
 
 import { Period } from "../entities/period";
+import { Status } from "../value-objects/status";
 import { Total } from "../value-objects/total";
 
 export interface AccumulatorProps {
@@ -8,4 +9,5 @@ export interface AccumulatorProps {
 	userId: Id;
 	period: Period;
 	total: Total;
+	status: Status
 }

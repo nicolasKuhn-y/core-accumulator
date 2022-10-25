@@ -38,7 +38,8 @@ export class Accumulator extends AggregateRoot {
 
     const createdAccumulatorEvent = new AccumulatorCreatedEvent({
       id: accumulatorCreated.id,
-      userId: accumulatorCreated.userId
+      userId: accumulatorCreated.userId,
+      period: accumulatorCreated.period
     })
 
     accumulatorCreated.saveEvent(createdAccumulatorEvent)

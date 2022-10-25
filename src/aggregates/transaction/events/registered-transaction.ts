@@ -1,7 +1,7 @@
 import { DomainEvent, Id } from 'common-domain'
 
 type EventInput = {
-    id: Id;
+  id: Id;
 };
 
 export class RecordedTransactionEvent extends DomainEvent {

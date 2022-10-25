@@ -1,8 +1,8 @@
 import { DomainEvent, Id } from 'common-domain'
 
 type EventInput = {
-    id: Id;
-    userId: Id;
+  id: Id;
+  userId: Id;
 };
 
 export class AccumulatorCreatedEvent extends DomainEvent {
